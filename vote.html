@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="width=750,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>海选投票</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body class="in-rule" style="padding-top: 1rem;">
+    <div class="vote">
+        <div class="vote-box">
+            <h3>编号：44536</h3>
+            <div class="photograph">
+                <img src="images/touxiang.jpg" alt="">
+            </div>
+            <div class="datum">
+                <b>Lily Anna</b>
+                <div><span>北京朝阳</span></div>
+                <div><span>8岁</span></div>                
+            </div>
+            <div class="quantity-poll">
+                <div class="quantity">
+                    <p>当前排名：<span>10</span></p>
+                    <p><span>223845</span> 票</p>
+                </div>
+                <div class="poll"></div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <a class="ranking1" href="list.html"><img src="images/ranking.png"></a>
+        <a class="participation1"><img src="images/participation.png" border="0" ></a>
+        <a class="poster1" style="display: none"><img src="images/poster.png" border="0" ></a>
+    </div>    
+</body>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/common.js"></script> 
+    <script>
+        $(function(){
+            var i=0;
+            $(".poll").click(function(){
+                if (i<5) {
+                    var quantity=$(".quantity p:nth-child(2) span").text();
+                    $(".quantity p:nth-child(2) span").text(parseInt(quantity)+1);
+                    $(this).css({
+                        "background":"url(images/praise.png) no-repeat center",
+                        "background-size":"2.6rem",
+                    });
+                    i++;
+                }else{
+                    alert("一天最多投5票！");
+                }
+            });       
+            var p=0
+            var Media = document.getElementById("videoSource");
+            $("#videoSource").click(function(){
+               
+                if(p==0){
+                    Media.play(); //播放
+                    p++
+                }else{
+                    Media.pause(); //暂停   
+                    p=0;
+                }
+            });
+            
+                
+        })
+    </script>
+</html>

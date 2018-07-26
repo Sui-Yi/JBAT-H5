@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="width=750,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>排行榜</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body class="list">
+    <div class="list-box">
+        <div class="search">
+            <input type="text" placeholder="请输入姓名或编码搜索">
+            <img class="sou" src="images/sou.png">
+        </div>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <ul>
+                        <li>
+                            <a href="vote.html">
+                                <img class="star" src="images/star.png">
+                                <div class="img">
+                                    <img src="images/touxiang.jpg">
+                                </div>
+                                <div class="bottom-box">
+                                    <div class="datum">
+                                        <b>编号：001</b>
+                                        <a class="num">刘晓丽</a>
+                                    </div>  
+                                    <div class="poll-1"><span>1111111</span>票</div>   
+                                    <hr size="1" color="#febc71">                                                          
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <img class="star" src="images/star.png">
+                            <div class="img">
+                                <img src="images/touxiang.jpg">
+                            </div>
+                            <div class="bottom-box">
+                                <div class="poll-1">刘晓丽</div>   
+                                <hr size="1" color="#febc71">
+                                <div class="datum">
+                                    <b>编号：001</b>
+                                    <a class="num">编号：<span>001</span></a>
+                                </div>                        
+                            </div>
+                        </li>
+                        <li>
+                            <div class="img">
+                                <img src="images/touxiang.jpg">
+                            </div>
+                            <div class="bottom-box">
+                                <div class="poll-1">刘晓丽</div>   
+                                <hr size="1" color="#febc71">
+                                <div class="datum">
+                                    <b>编号：001</b>
+                                    <a class="num">编号：<span>001</span></a>
+                                </div>                        
+                            </div>
+                        </li>                        
+                        <li>
+                            <div class="img">
+                                <img src="images/touxiang.jpg">
+                            </div>
+                            <div class="bottom-box">
+                                <div class="poll-1">刘晓丽</div>   
+                                <hr size="1" color="#febc71">
+                                <div class="datum">
+                                    <b>编号：001</b>
+                                    <a class="num">编号：<span>001</span></a>
+                                </div>                        
+                            </div>
+                        </li>                        
+                        </li>
+                    </ul>
+                </div>
+                <div class="swiper-slide">
+                    2
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>            
+        </div>
+    </div>
+    <div class="bottom">
+        <a class="ranking1" href="index.html"><img src="images/FanIndex.png"></a>
+        <a class="centre1"><img src="images/centre1.png" border="0" ></a>
+    </div>    
+    <div class="window">
+        <div class="window-box">
+            <img class="string" src="images/hint.png">
+            <div class="window-content">
+            </div>
+            <a><div class="ok">确认</div></a>
+        </div>     
+    </div>    
+</body>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+        var swiperH = new Swiper('.swiper-container', {
+            loop : true,
+            pagination: '.swiper-pagination',
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            paginationClickable: true
+        });
+        $(function(){
+            $(".centre1").click(function(){
+                var html='<p>请先报名参加活动</p>'
+                $(".window-content h4").remove();
+                $(".window-content p").html("")
+                $(".window-content").append(html);
+                $(".ok").parent().attr("href","javascript:;");
+                $(".window").show();
+                $(".ok").click(function(){
+                    $(".window").hide();
+                });
+            });            
+        })
+    </script>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="width=750,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>填写资料</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body class="in-rule">
+    <form>
+        <div class="sign">
+            <img class="datum" src="images/datum.png">
+            <div class="sign-box" style="height: inherit;">
+                <div class="two">
+                    <b>姓名</b>
+                    <input name="name" type="text" placeholder="请输入宝宝姓名">
+                </div>
+                <div class="two">
+                    <b>性别</b>
+                    <select name="sex">
+                        <option>男</option>
+                        <option>女</option>
+                    </select>
+                </div>            
+                <div class="two">
+                    <b>年龄</b>
+                    <select name="age" type="text">
+                        <option>请选择宝宝年龄</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>            
+                <div class="two">
+                    <b>电话</b>
+                    <input name="phone" type="text" placeholder="请填写联系方式">
+                </div>    
+                <div class="two">
+                    <div class="outer">
+                        <select name="province" id="province">
+                            <option value="请选择">请选择</option>
+                        </select>
+                        <select name="city" id="city">
+                            <option value="请选择">请选择</option>
+                        </select>
+                        <select name="town" id="town">
+                            <option value="请选择">请选择</option>
+                        </select>
+                    </div>
+                </div>   
+                <div class="file">
+                    <span>上传宝宝照片</span>
+                    <input id="file" class="file-5" type="file" accept="image/*">
+                </div>
+                <div class="video-box">
+                    <div class="video">
+                        <span>上传宝宝视频</span>
+                        <input id="video" type="file" accept="video/*" onchange="changeFile(this)">
+                    </div>
+                    <img class="manifesto" src="images/manifesto.png">
+                    <textarea placeholder="请输入决赛宣言 限30字" maxlength="30"></textarea>                    
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <a class="FanIndex" href="index.html"><img src="images/FanIndex.png"></a>
+            <a class="ok1" href="poster.html"><img src="images/ok1.png" border="0" ></a>
+        </div>
+        
+        <div class="window">
+            <div class="window-box">
+                <img class="string" src="images/hint.png">
+                <div class="window-content">
+                </div>
+                <a><div class="ok">确认</div></a>
+            </div>      
+        </div>        
+    </form>    
+    <video style="display:none;" controls="controls" id="aa" oncanplaythrough="myFunction(this)">
+    <!-- 裁剪 -->
+    <div class="tailor">
+        <div id="clipArea"></div>
+        <div id="clipBtn">确定</div>
+        <input id="file" type="file" accept="image/*">
+    </div>    
+
+    <div class="preview">
+        <div id="view">
+            <img class="blue-cloud" src="images/blue-cloud.png" alt="">
+        </div>
+        <div class="bottom1">
+            <div id="previewBtn1">重新选择</div>
+            <div id="previewBtn2">确定</div>
+        </div>        
+    </div>
+</body>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/common.js"></script> 
+    <script src="js/area.js"></script>
+    <script src="js/select.js"></script>
+    <script src="js/iscroll-zoom.js"></script>
+    <script src="js/hammer.js"></script>
+    <script src="js/jquery.photoClip.js"></script>
+    <script>
+        $(function(){
+            var test=test
+            $(".ok1").click(function(){
+                var name = $('input[name="name"]').val();
+                var age = $('select[name="age"]').val();
+                var phone = $('input[name="phone"]').val();
+                var province = $('select[name="province"]').val();
+                var city = $('select[name="city"]').val();
+                var town = $('select[name="town"]').val();
+                var myreg=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+                var ImgJust=$("#file").val();
+                var video=$("#video").val();
+                var videotextarea= $(".video-box textarea").val();
+                if(name==""){
+                    var html1='<p>请填写姓名</p>'
+                    win(html1);   
+                    return false;
+                }else if(age=="请选择宝宝年龄"){
+                    var html1='<p>请选择宝宝年龄</p>'
+                    win(html1);                     
+                    return false;
+                }else if(phone==""){
+                    alert("请填写电话");
+                    return false;
+                }else if(!myreg.test(phone)){
+                    alert("请填写正确的电话");
+                    return false;
+                }else if(province=="请选择"){
+                    alert("请选择省");
+                    return false;
+                }else if(city=="请选择"){
+                    alert("请选择市");
+                    return false;
+                }else if(town=="请选择"){
+                    alert("请选择区");
+                    return false;
+                }else if($(".file").is(':visible')==true && $(".video-box").is(':visible')==false){
+                    if (ImgJust=="") {
+                        alert("请上传照片");
+                        return false;                        
+                    }else{
+                        $("form").submit()
+                    } 
+                }else if($(".file").is(':visible')==false && $(".video-box").is(':visible')==true){
+                    if (video=="") {
+                        alert("请上传视频");
+                        return false;                        
+                    }else if(videotextarea==""){
+                        alert("请上填写决赛宣言");
+                        return false;
+                    }else{
+                        $("form").submit()
+                    }                     
+                }
+            });
+
+            //裁剪框 
+            $("#clipArea").photoClip({
+                width: 350,
+                height: 400,
+                file: "#file",
+                view: "#view",
+                ok: "#clipBtn",
+                loadStart: function() {
+                    console.log("照片读取中");
+                },
+                loadComplete: function() {
+                    console.log("照片读取完成");
+                },
+                clipFinish: function(dataURL) {
+                    console.log(dataURL);
+                }
+            });
+            // 上传图片
+            $('#file').bind('change', function(ooo) {
+                console.log(getObjectURL(this.files[0]));
+                // $(".ImgJust").attr("src",getObjectURL(this.files[0])).show();
+                var fSize = 1024 * 1024 *8;
+                var size = this.files[0].size;
+                var ImgJust=$("#file").val();
+                var suffixIndex = ImgJust.lastIndexOf(".");
+                var suffix = ImgJust.substring(suffixIndex + 1).toUpperCase();                
+                if(fSize<size){
+                    alert("图片不能大于8M");
+                    $("#file").val("");
+                    return false;
+                }if (suffix != "JPG" && suffix != "JPEG" && suffix != "jpg") {
+                    alert("请上传图片（格式JPG）!");
+                    return false;
+                }else{
+                    // alert("上传成功！");
+                    $(".tailor").show();
+                }
+            });
+            // $('#video').bind('change', function(ooo) {
+            //     console.log(getObjectURL(this.files[0]));
+            //     // $(".ImgJust").attr("src",getObjectURL(this.files[0])).show();
+            //     var duration = $("#video").duration;
+            //     console.log(duration)
+            //     var fSize = 1024 * 1024 *50;
+            //     var size = this.files[0].size;
+            //     if(fSize<size){
+            //         alert("视频不能大于50M");
+            //         $("#video").val("");
+            //         return false;
+            //     }else{
+            //         alert("上传成功！");
+            //     }
+            // });            
+
+
+
+            function getObjectURL(file) {
+                var url = null;
+                if(window.createObjectURL != undefined) { // basic
+                    url = window.createObjectURL(file);
+                } else if(window.URL != undefined) { // mozilla(firefox)
+                    url = window.URL.createObjectURL(file);
+                } else if(window.webkitURL != undefined) { // webkit or chrome
+                    url = window.webkitURL.createObjectURL(file);
+                }
+                return url;
+            }
+            $(".ok").click(function(){
+                $(".window").hide();
+            });        
+            function win(html){
+                $(".window-content p").html("");
+                $(".window-content").append(html);
+                $(".window").show();                 
+            }         
+            $("#clipBtn").click(function(){
+                $(".tailor").hide();
+                $(".preview").show();
+            });    
+            $("#previewBtn2").click(function(){
+                $(".preview").hide();
+            });           
+            $("#previewBtn1").click(function(event) {
+                $(".preview").hide();
+                $("#file").click();
+            });
+        })
+
+        function myFunction(ele) {
+            console.log(ele.duration);
+            var hour = parseInt((ele.duration)/3600);
+            var minute = parseInt((ele.duration%3600)/60);
+            var second = Math.ceil(ele.duration%60);
+            //console.log(Math.floor(ele.duration));
+            //document.write("这段视频的时长为："+hour+"小时，"+minute+"分，"+second+"秒");
+            var time ="这段视频的时长为："+hour+"小时，"+minute+"分，"+second+"秒";
+            console.log(time);
+            }  
+              
+            function changeFile(ele){  
+                var video = ele.files[0];  
+                var url = URL.createObjectURL(video);  
+                console.log(url);  
+                document.getElementById("aa").src = url;  
+            }         
+    </script>  
+</html>

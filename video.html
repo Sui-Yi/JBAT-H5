@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="width=750,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>海选投票</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        .videoSource{
+            height: 6rem;
+            width: 100%;
+            max-height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .video-play{
+            width: 1.4rem!important;
+            height: 1.4rem;
+            position: absolute;
+            top:50%;
+            left: 50%;
+            margin-left: -.7rem;
+            margin-top: -.7rem;
+        }
+    </style>
+</head>
+
+<body class="in-rule" style="padding-top: 1rem;">
+    <div class="vote">
+        <div class="vote-box">
+            <h3>编号：44536</h3>
+            <div class="photograph">
+                <!-- <img src="images/touxiang.jpg" alt=""> -->
+                <div class="videoSource">
+                    <img src="images/touxiang.png" alt="">
+                    <img class="video-play" src="images/play.png" alt="">
+                </div>
+                <img class="manifesto" src="images/manifesto.png">
+                <p>我是安琪，正在参加佳贝艾特“荷兰探秘第3季” 萌娃招募选拔，请为我投票助力吧！</p>
+            </div>
+            <div class="datum">
+                <b>Lily Anna</b>
+                <div><span>北京朝阳</span></div>
+                <div><span>8岁</span></div>                
+            </div>
+            <div class="quantity-poll">
+                <div class="quantity">
+                    <p>当前排名：<span>10</span></p>
+                    <p><span>223845</span> 票</p>
+                </div>
+                <div class="poll"></div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <a class="ranking1" href="index.html"><img src="images/ranking1.png"></a>
+        <a class="participation1"><img src="images/participation.png" border="0" ></a>
+        <a class="poster" style="display: none"><img src="images/poster.png" border="0" ></a>
+    </div>    
+    <video id="videoSource" width="100%" height="100%" controls="" poster="images/touxiang.png" preload="auto" src="images/33.mp4"></video>
+</body>
+    <!-- <script src="js/jquery-1.8.3.min.js"></script> -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/common.js"></script> 
+    <script>
+        $(function(){
+            var i=0;
+            $(".poll").click(function(){
+                $.ajax({
+                    url: '/user/votessub',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {beuserid : 'value1'},
+                    success:function(ret){
+                        console.log(ret)
+                    }
+                })
+            }); 
+
+            $(".videoSource img,.video-play").click(function(){
+                var autio = document.getElementById("videoSource");
+                $("#videoSource").show();
+                autio.play();
+            });
+            // var videoH = $("#videoSource").height();
+            // var videoW = $("#videoSource").width();
+            // console.log(videoW,videoH)
+            // if(videoW>videoH){
+            //     $("#videoSource").css("margin-top","1rem");
+            // }                  
+        })
+    </script>
+</html>

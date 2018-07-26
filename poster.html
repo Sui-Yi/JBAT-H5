@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="width=750,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>我的海报</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body class="poster">
+    <img id="CanvasPoster" src="" onclick="return false" >
+    <div class="vote poster-box">
+        <div class="vote-box" id="container">
+            <div class="photograph">
+                <img src="images/touxiang.jpg">            
+            </div>
+            <div class="bluecloud">
+                <img class="blue-cloud" src="images/blue-cloud.png">
+                <div class="code">
+                    <p class="introduce"><b>我是<span>安迪</span></b>，<br>正在参加佳贝艾特“荷兰探秘第3季” 萌娃招募选拔，请为我投票助力吧！</p>
+                    <div id="code"></div>
+                </div>                
+            </div>            
+        </div>
+    </div>
+    <p class="vote-box-p">长按保存图片分享拉票</p>
+    <div class="bottom">
+        <a class="ranking1" href="index.html">
+            <img src="images/ranking.png">
+        </a>
+        <a>
+            <img class="share" src="images/share.png" border="0">
+        </a>
+    </div>
+    <div class="window">
+        <img class="quan" src="images/quan.png">
+        <div class="window-box">
+            <img class="string" src="images/hint.png">
+            <div class="window-content">
+                <p>点击右上角分享，<br>邀请好友投票助力吧！</p>
+            </div>
+            <a><div class="ok">确认</div></a>
+        </div>    
+    </div>    
+</body>
+<script src="js/jquery-1.8.3.min.js"></script>
+<!-- 二维码 -->
+<script src="js/jquery.qrcode.min.js"></script>
+<!-- <script src="https://cdn.bootcss.com/html2canvas/0.4.1/html2canvas.js"></script> -->
+<script src="js/common.js"></script>
+<script src="js/html2canvas.js"></script>
+<!-- <script src="js/canvas2image.js"></script> -->
+<script type="text/javascript">
+    $(function () {
+        // 二维码
+        var str = "http://www.baidu.com";
+        $('#code').qrcode(str);
+
+        // 分享弹框
+        $(".share").click(function(){
+            $(".window").show();
+        });
+        $(".ok").click(function(){
+            $(".window").hide();
+        });          
+    })
+
+    // 生成海报
+    window.onload = function( ){ 
+        var canvas = document.createElement("canvas"),
+        w=$('#container').outerWidth(),
+        h=$('#container').outerHeight();
+        canvas.width = w * 2;
+        canvas.height = h * 2;
+        canvas.style.width = w + "px";
+        canvas.style.height = h + "px";
+        var context = canvas.getContext("2d");
+        //然后将画布缩放，将图像放大两倍画到画布上
+        context.scale(2,2);
+        html2canvas($("#container"), {
+            allowTaint: false,
+            taintTest: true,
+            canvas: canvas,
+            onrendered: function(canvas) {
+                canvas.id = "mycanvas";
+                canvas.style.display = 'none';
+                document.body.appendChild(canvas);
+                //生成base64图片数据
+
+                imgData = canvas.toDataURL();
+                $("#CanvasPoster").attr('src',imgData); 
+                console.log(canvas)
+                //var newImg = document.createElement("img");
+                //newImg.src =  dataUrl;
+                //document.body.appendChild(newImg);
+                //console.log(imgData);
+
+                // imgData = imgData.replace(_fixType(type),'image/octet-stream');
+            },
+        })
+    }
+</script>
+
+</html>

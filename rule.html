@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="width=750,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>活动规则</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        .sign-box::-webkit-scrollbar-track-piece {  
+            background-color: rgba(0, 0, 0, 0);  
+            border-left: 1px solid rgba(0, 0, 0, 0);  
+        }  
+        .sign-box::-webkit-scrollbar {  
+            width: 5px;  
+            height: 5px;  
+            -webkit-border-radius: 5px;  
+            -moz-border-radius: 5px;  
+            border-radius: 5px;  
+        }  
+        .sign-box::-webkit-scrollbar-thumb {  
+            background-color: rgba(0, 0, 0, 0.5);  
+            background-clip: padding-box;  
+            -webkit-border-radius: 5px;  
+            -moz-border-radius: 5px;  
+            border-radius: 5px;  
+            min-height: 28px;  
+        }  
+        .sign-box::-webkit-scrollbar-thumb:hover {  
+            background-color: rgba(0, 0, 0, 0.5);  
+            -webkit-border-radius: 5px;  
+            -moz-border-radius: 5px;  
+            border-radius: 5px;  
+        }
+    </style>
+</head>
+
+<body class="in-rule">
+    <div class="sign">
+        <img class="rule1" src="images/rule1.png" alt="">
+        <div class="sign-box">
+            <img src="images/rule2.png">  
+        </div>
+        <div class="rule-read">
+            <label><input type="checkbox">我已阅读并了解活动规则</label>
+        </div>
+    </div>
+    <div class="bottom">
+        <a class="FanIndex" href="index.html"><img src="images/FanIndex.png"></a>
+        <a class="ok1"><img src="images/ok1.png" border="0" ></a>
+        <!-- <a class="FanIndex"><img class="centre" src="images/centre.png"></a> -->
+    </div>
+</body>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/common.js"></script> 
+    <script>
+        $(function(){
+            $(".ok1").click(function(){
+                if ($(".rule-read input").prop("checked")==true){
+                    window.location.href="mass-election.html";
+                }else{
+                    alert("请仔细阅读活动规则！")
+                }
+            });
+            $(".sign-box").scroll(function(){
+                $(".sign-box").scrollTop();
+                console.log($(".sign-box").scrollTop());
+            })           
+        });
+        
+        
+    </script>
+</html>
